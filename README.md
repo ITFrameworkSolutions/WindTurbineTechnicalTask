@@ -1,4 +1,6 @@
 # Wind Turbine Technical Task
+
+## Brief
 Consider the following scenario:
 
 You are a data engineer for a renewable energy company that operates a farm of wind turbines. The turbines generate power based on wind speed and direction, and their output is measured in megawatts (MW). Your task is to build a data processing pipeline that ingests raw data from the turbines and performs the following operations:
@@ -16,3 +18,22 @@ Your pipeline should be scalable and testable; emphasis is based on the clarity 
 
 Your solution should be implemented in Python, using any frameworks or libraries that you deem appropriate. Please provide a brief description of your solution design and any assumptions made in your implementation.
 
+## Outline
+
+### Considerations
+Data is stored on an AWS S3 bucket 
+
+Initial load wont have enough data to apply an average. Flag rows and revisit.
+
+Malfunctions occur. This would be represented as missing or corrupted data. Options
+- Exclude and replace with average - chosen option
+- Replace with data that arrived late
+- Exclude entire day
+
+### Assumptions
+All day measurements use timestamps that assume 0:00:00 to 23:59:59. If the feeds are across timezones, this would need to be adapted
+
+### Future
+Use wind_direction, wind_speed, power_output and malfuntions to attempt to inform or predict wear and tear or potential future malfunctions.
+
+Consider archiving the feeds to reduce processing as the data scales.
